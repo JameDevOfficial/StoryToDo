@@ -1,3 +1,14 @@
+# Dependencies
 node_modules
+
+# Caches
 .parcel-cache
+
+# Build output
+dist
+
+# IDE / Editor specific
+.vscode
+
+# Project planning files
 idea*
