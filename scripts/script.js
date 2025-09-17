@@ -118,22 +118,49 @@ function removeTask(key) {
     delete tasks[key];
 }
 async function handleStoryRequest(isNovel = false) {
+    const storyContent = document.getElementById("story-content");
+    const loadingAnim = document.getElementById("loading-animation");
     console.log(gemini.getAPIKey());
     if (gemini.getAPIKey() == undefined) {
         const apiKey = prompt("Please enter your Gemini API key:");
         if (apiKey) {
             gemini.setAPIKey(apiKey);
         }
-        gemini.listModels().then((models) => {
-            console.log("Available Gemini Models:", models);
-        });
+        // gemini.listModels().then((models) => {
+        //     console.log("Available Gemini Models:", models);
+        // });
     }
     console.log("Calling GEMINI");
-    const aiPrompt =
-        "Generate a creative story that links all of the tasks mentioned below in a fun way, so the user has some fun doing them. Keep it short and at a readable size, so people dont get bored. Talk to the user in second person, as if he is the main character of the story. Seperate every part of the story with each task with newlines. Make the story in the language of the Tasks: " +
+    var aiPrompt =
+        "Generate a creative story that links all of the tasks mentioned below in a fun way, so the user has some fun doing them. Keep it very short and at a readable size, so people dont get bored. Talk to the user in second person, as if he is the main character of the story. Seperate every part of the story with each task with newlines. Make the story in the language of the Tasks if not specified otherwise: " +
         Object.values(tasks).join(", ");
-    var response = await gemini.callGemini(aiPrompt);
-    console.log(response);
+    const themeOptional = document.getElementById("story-theme");
+    if (themeOptional.value != "") {
+        aiPrompt =
+            aiPrompt +
+            "\nHere is a basic theme you should follow for the story: " +
+            themeOptional.value;
+    }
+    const langOptional = document.getElementById("story-lang");
+    if (langOptional.value != "") {
+        aiPrompt =
+            aiPrompt +
+            "\nUse this language: " +
+            langOptional.value;
+    }
+    loadingAnim.classList.add("flex");
+    loadingAnim.classList.remove("hidden");
+    storyContent.innerText = "Generating story ...";
+    try {
+        var response = await gemini.callGemini(aiPrompt);
+        storyContent.innerText = response;
+    } catch (error) {
+        storyContent.innerText =
+            "An error occurred while generating the story.";
+        console.error(error);
+    }
+    loadingAnim.classList.add("hidden");
+    loadingAnim.classList.remove("flex");
     console.log(aiPrompt);
 }
 
