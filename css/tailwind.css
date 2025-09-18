@@ -184,6 +184,9 @@
   }
 }
 @layer utilities {
+  .float-right {
+    float: right;
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -205,11 +208,11 @@
   .hidden {
     display: none;
   }
-  .table {
-    display: table;
-  }
   .h-32 {
     height: calc(var(--spacing) * 32);
+  }
+  .h-auto {
+    height: auto;
   }
   .w-full {
     width: 100%;
@@ -223,14 +226,8 @@
   .flex-1 {
     flex: 1;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -330,16 +327,9 @@
   .text-white {
     color: var(--color-white);
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .shadow-lg {
     --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .hover\:cursor-pointer {
     &:hover {
@@ -379,29 +369,9 @@
       background-color: #3a51c3;
     }
   }
-  .dark\:bg-\[\#5f70c5\] {
-    &:where(.dark, .dark *) {
-      background-color: #5f70c5;
-    }
-  }
-  .dark\:bg-\[\#5fc57e\] {
-    &:where(.dark, .dark *) {
-      background-color: #5fc57e;
-    }
-  }
-  .dark\:bg-\[\#7b8cdf\] {
-    &:where(.dark, .dark *) {
-      background-color: #7b8cdf;
-    }
-  }
   .dark\:bg-\[\#26a04b\] {
     &:where(.dark, .dark *) {
       background-color: #26a04b;
-    }
-  }
-  .dark\:bg-\[\#141f54\] {
-    &:where(.dark, .dark *) {
-      background-color: #141f54;
     }
   }
   .dark\:bg-\[\#384ebe\] {
@@ -409,19 +379,9 @@
       background-color: #384ebe;
     }
   }
-  .dark\:bg-\[\#35469b\] {
-    &:where(.dark, .dark *) {
-      background-color: #35469b;
-    }
-  }
   .dark\:bg-\[\#121212\] {
     &:where(.dark, .dark *) {
       background-color: #121212;
-    }
-  }
-  .dark\:bg-\[\#243173\] {
-    &:where(.dark, .dark *) {
-      background-color: #243173;
     }
   }
   .dark\:bg-\[\#282828\] {
@@ -434,86 +394,9 @@
       background-color: #343434;
     }
   }
-  .dark\:bg-\[\#7343434\] {
-    &:where(.dark, .dark *) {
-      background-color: #7343434;
-    }
-  }
-  .dark\:bg-\[\#b9c2ef\] {
-    &:where(.dark, .dark *) {
-      background-color: #b9c2ef;
-    }
-  }
   .dark\:bg-\[\#c53b3b\] {
     &:where(.dark, .dark *) {
       background-color: #c53b3b;
-    }
-  }
-  .dark\:bg-\[\#c55f5f\] {
-    &:where(.dark, .dark *) {
-      background-color: #c55f5f;
-    }
-  }
-  .dark\:bg-\[rgb\(52\,52\,52\)\] {
-    &:where(.dark, .dark *) {
-      background-color: rgb(52,52,52);
-    }
-  }
-  .dark\:bg-blue-800 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-blue-800);
-    }
-  }
-  .dark\:bg-blue-900 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-blue-900);
-    }
-  }
-  .dark\:bg-gray-600 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-gray-600);
-    }
-  }
-  .dark\:bg-gray-700 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-gray-700);
-    }
-  }
-  .dark\:bg-gray-800 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-gray-800);
-    }
-  }
-  .dark\:bg-gray-900 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-gray-900);
-    }
-  }
-  .dark\:bg-gray-950 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-gray-950);
-    }
-  }
-  .dark\:bg-teal-900 {
-    &:where(.dark, .dark *) {
-      background-color: var(--color-teal-900);
-    }
-  }
-  .dark\:dark\:text-\[\#b9c2ef\] {
-    &:where(.dark, .dark *) {
-      &:where(.dark, .dark *) {
-        color: #b9c2ef;
-      }
-    }
-  }
-  .dark\:text-\[\#3b4682\] {
-    &:where(.dark, .dark *) {
-      color: #3b4682;
-    }
-  }
-  .dark\:text-\[\#243173\] {
-    &:where(.dark, .dark *) {
-      color: #243173;
     }
   }
   .dark\:text-\[\#b9c2ef\] {
@@ -526,15 +409,6 @@
       color: #e0e3f8;
     }
   }
-  .dark\:hover\:bg-\[\#7b8cdf\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #7b8cdf;
-        }
-      }
-    }
-  }
   .dark\:hover\:bg-\[\#38ba4a\] {
     &:where(.dark, .dark *) {
       &:hover {
@@ -544,56 +418,11 @@
       }
     }
   }
-  .dark\:hover\:bg-\[\#60d36f\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #60d36f;
-        }
-      }
-    }
-  }
-  .dark\:hover\:bg-\[\#94a3ee\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #94a3ee;
-        }
-      }
-    }
-  }
   .dark\:hover\:bg-\[\#5870e4\] {
     &:where(.dark, .dark *) {
       &:hover {
         @media (hover: hover) {
           background-color: #5870e4;
-        }
-      }
-    }
-  }
-  .dark\:hover\:bg-\[\#6073d3\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #6073d3;
-        }
-      }
-    }
-  }
-  .dark\:hover\:bg-\[\#6979cc\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #6979cc;
-        }
-      }
-    }
-  }
-  .dark\:hover\:bg-\[\#d36060\] {
-    &:where(.dark, .dark *) {
-      &:hover {
-        @media (hover: hover) {
-          background-color: #d36060;
         }
       }
     }
@@ -687,11 +516,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -712,7 +536,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-      --tw-outline-style: solid;
     }
   }
 }
