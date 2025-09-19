@@ -165,7 +165,7 @@ async function handleStoryRequest(isNovel = false) {
         "Generate a creative story that links all of the tasks mentioned below in a fun way, so the user has some fun doing them. Don't make him solve riddles, since this should only link the tasks for a real life experience. Keep it very short and at a readable size, so people don't get bored. Talk to the user in second person, as if he is the main character of the story. Seperate every part of the story with each task with newlines. Make the story in the language of the Tasks if not specified otherwise: " +
         Object.values(tasks).join(", ");
     var imagePrompt =
-        "Generate an Image about the following tasks, don't make any text or close ups of text, objects or persons. Only make scenes. A person that does: " +
+        "Generate an Image about the following tasks, don't make any text or close ups of text!!!!, objects or persons!!!!. Only make scenes. A person that does: " +
         Object.values(tasks).join(", ");
     const themeOptional = document.getElementById("story-theme");
     if (themeOptional.value != "") {
@@ -183,7 +183,8 @@ async function handleStoryRequest(isNovel = false) {
     }
     loadingAnim.classList.add("flex");
     loadingAnim.classList.remove("hidden");
-    storyContent.innerText = "Generating story ...";
+    storyContent.innerText =
+        "Generating a wonderful story and image for you (using pollinations.ai)...";
     var aiImage = genPollinations.genImage(
         imagePrompt,
         "1024",
@@ -191,7 +192,11 @@ async function handleStoryRequest(isNovel = false) {
         Math.floor(Math.random() * 1000000),
     );
     try {
-        var response = await genPollinations.generatePrivateText(aiPrompt);
+        var response = await genPollinations.generatePrivateText(
+            aiPrompt,
+            "openai",
+            Math.random() * 1000000,
+        );
         storyContent.innerText = response;
     } catch {
         storyContent.innerText =

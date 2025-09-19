@@ -5,13 +5,13 @@ export function genImage(
     seed = "42",
     model = "flux",
 ) {
-    const imageUrl = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?width=${width}&height=${height}&seed=${seed}&model=${model}`;
+    const imageUrl = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?width=${width}&height=${height}&seed=${seed}&model=${model}&private=true`;
     return imageUrl;
 }
 
-export async function generatePrivateText(aiPrompt, model = "openai") {
+export async function generatePrivateText(aiPrompt, model = "openai", seed="42") {
     console.log("test");
-    const url = `https://text.pollinations.ai/${encodeURIComponent(aiPrompt)}`;
+    const url = `https://text.pollinations.ai/${encodeURIComponent(aiPrompt)}&private=true&seed=${encodeURIComponent(seed)}`;
     const fetchResponse = await fetch(url);
     const responseText = await fetchResponse.text();
     const sponsorSeparator = "\n---\n";
