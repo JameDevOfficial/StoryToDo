@@ -1,5 +1,5 @@
 "use strict";
-import * as gemini from "./gemini.js";
+import * as gemini from "./gemini-new.js";
 const taskKeyPrefix = "task-";
 
 var tasks = {};
@@ -193,7 +193,7 @@ async function handleStoryRequest(isNovel = false) {
     existingImages.forEach((img) => img.remove());
 
     try {
-        var response = await gemini.callGemini(aiPrompt);
+        var response = "Skipped " ;//await gemini.callGemini(aiPrompt);
         storyContent.innerText = response;
 
         // Generate an image based on the story theme or tasks
@@ -202,9 +202,9 @@ async function handleStoryRequest(isNovel = false) {
             `Illustration for: ${Object.values(tasks).slice(0, 3).join(", ")}`;
         var imageElement = await gemini.genImage(imagePrompt);
 
-        if (imageElement) {
+         if (imageElement) {
             storyWrapper.appendChild(imageElement);
-        }
+        } 
     } catch (error) {
         storyContent.innerText =
             "An error occurred while generating the story.";

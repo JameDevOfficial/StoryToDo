@@ -24,7 +24,10 @@
     "tailwindcss": "^4.1.13"
   },
   "dependencies": {
+    "@google/genai": "^1.20.0",
     "@google/generative-ai": "^0.24.1",
-    "@tailwindcss/cli": "^4.1.13"
+    "@tailwindcss/cli": "^4.1.13",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
