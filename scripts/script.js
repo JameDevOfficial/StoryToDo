@@ -165,9 +165,6 @@ async function handleStoryRequest(isNovel = false) {
         if (apiKey) {
             gemini.setAPIKey(apiKey);
         }
-        // gemini.listModels().then((models) => {
-        //     console.log("Available Gemini Models:", models);
-        // });
     }
     console.log("Calling GEMINI");
     var aiPrompt =
@@ -187,9 +184,27 @@ async function handleStoryRequest(isNovel = false) {
     loadingAnim.classList.add("flex");
     loadingAnim.classList.remove("hidden");
     storyContent.innerText = "Generating story ...";
+
+    // Clear any existing images
+    const storyWrapper = document.getElementById("story-wrapper2");
+    const existingImages = storyWrapper.querySelectorAll(
+        'img:not([src*="loading"])',
+    );
+    existingImages.forEach((img) => img.remove());
+
     try {
         var response = await gemini.callGemini(aiPrompt);
         storyContent.innerText = response;
+
+        // Generate an image based on the story theme or tasks
+        const imagePrompt =
+            themeOptional.value ||
+            `Illustration for: ${Object.values(tasks).slice(0, 3).join(", ")}`;
+        var imageElement = await gemini.genImage(imagePrompt);
+
+        if (imageElement) {
+            storyWrapper.appendChild(imageElement);
+        }
     } catch (error) {
         storyContent.innerText =
             "An error occurred while generating the story.";
