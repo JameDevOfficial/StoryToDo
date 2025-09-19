@@ -1,5 +1,6 @@
 "use strict";
 import * as gemini from "./gemini-new.js";
+import * as genPollinations from "./genPollinations.js";
 const taskKeyPrefix = "task-";
 
 var tasks = {};
@@ -170,6 +171,7 @@ async function handleStoryRequest(isNovel = false) {
     var aiPrompt =
         "Generate a creative story that links all of the tasks mentioned below in a fun way, so the user has some fun doing them. Don't make him solve riddles, since this should only link the tasks for a real life experience. Keep it very short and at a readable size, so people don't get bored. Talk to the user in second person, as if he is the main character of the story. Seperate every part of the story with each task with newlines. Make the story in the language of the Tasks if not specified otherwise: " +
         Object.values(tasks).join(", ");
+    var imagePrompt = "Generate an Image about the following tasks, don't make any text or close ups of text, objects or persons. Only make scenes. A person that does: "+Object.values(tasks).join(", ");
     const themeOptional = document.getElementById("story-theme");
     if (themeOptional.value != "") {
         aiPrompt =
@@ -184,32 +186,23 @@ async function handleStoryRequest(isNovel = false) {
     loadingAnim.classList.add("flex");
     loadingAnim.classList.remove("hidden");
     storyContent.innerText = "Generating story ...";
-
-    // Clear any existing images
-    const storyWrapper = document.getElementById("story-wrapper2");
-    const existingImages = storyWrapper.querySelectorAll(
-        'img:not([src*="loading"])',
-    );
-    existingImages.forEach((img) => img.remove());
-
+    var aiImage = genPollinations.genImage(imagePrompt, "1024", "1024", Math.floor(Math.random() * 1000000));
     try {
-        var response = "Skipped " ;//await gemini.callGemini(aiPrompt);
+        var response = await genPollinations.generatePrivateText(aiPrompt);
         storyContent.innerText = response;
-
-        // Generate an image based on the story theme or tasks
-        const imagePrompt =
-            themeOptional.value ||
-            `Illustration for: ${Object.values(tasks).slice(0, 3).join(", ")}`;
-        var imageElement = await gemini.genImage(imagePrompt);
-
-         if (imageElement) {
-            storyWrapper.appendChild(imageElement);
-        } 
-    } catch (error) {
+    } catch {
         storyContent.innerText =
-            "An error occurred while generating the story.";
-        console.error(error);
+            "Failed to generate story. Please check your API key and try again.";
+        console.error("Error calling Gemini API:", error);
+        throw new Error("Failed to generate story");
     }
+
+    const aiImageElement = document.getElementById("aiImage");
+    aiImageElement.classList.add("flex");
+    aiImageElement.classList.remove("hidden");
+    aiImageElement.alt = "Loading image ...";
+    aiImageElement.src = aiImage;
+
     loadingAnim.classList.add("hidden");
     loadingAnim.classList.remove("flex");
     console.log(aiPrompt);
