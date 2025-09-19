@@ -1,5 +1,4 @@
 "use strict";
-import * as gemini from "./gemini-new.js";
 import * as genPollinations from "./genPollinations.js";
 const taskKeyPrefix = "task-";
 
@@ -160,23 +159,22 @@ function removeTask(key) {
 async function handleStoryRequest(isNovel = false) {
     const storyContent = document.getElementById("story-content");
     const loadingAnim = document.getElementById("loading-animation");
-    console.log(gemini.getAPIKey());
-    if (gemini.getAPIKey() == undefined) {
-        const apiKey = prompt("Please enter your Gemini API key:");
-        if (apiKey) {
-            gemini.setAPIKey(apiKey);
-        }
-    }
-    console.log("Calling GEMINI");
+
+    console.log("Calling AI");
     var aiPrompt =
         "Generate a creative story that links all of the tasks mentioned below in a fun way, so the user has some fun doing them. Don't make him solve riddles, since this should only link the tasks for a real life experience. Keep it very short and at a readable size, so people don't get bored. Talk to the user in second person, as if he is the main character of the story. Seperate every part of the story with each task with newlines. Make the story in the language of the Tasks if not specified otherwise: " +
         Object.values(tasks).join(", ");
-    var imagePrompt = "Generate an Image about the following tasks, don't make any text or close ups of text, objects or persons. Only make scenes. A person that does: "+Object.values(tasks).join(", ");
+    var imagePrompt =
+        "Generate an Image about the following tasks, don't make any text or close ups of text, objects or persons. Only make scenes. A person that does: " +
+        Object.values(tasks).join(", ");
     const themeOptional = document.getElementById("story-theme");
     if (themeOptional.value != "") {
         aiPrompt =
             aiPrompt +
             "\nHere is a basic theme you should follow for the story: " +
+            themeOptional.value;
+        imagePrompt +
+            "\nHere is a basic theme you should follow for the image: " +
             themeOptional.value;
     }
     const langOptional = document.getElementById("story-lang");
@@ -186,14 +184,19 @@ async function handleStoryRequest(isNovel = false) {
     loadingAnim.classList.add("flex");
     loadingAnim.classList.remove("hidden");
     storyContent.innerText = "Generating story ...";
-    var aiImage = genPollinations.genImage(imagePrompt, "1024", "1024", Math.floor(Math.random() * 1000000));
+    var aiImage = genPollinations.genImage(
+        imagePrompt,
+        "1024",
+        "1024",
+        Math.floor(Math.random() * 1000000),
+    );
     try {
         var response = await genPollinations.generatePrivateText(aiPrompt);
         storyContent.innerText = response;
     } catch {
         storyContent.innerText =
             "Failed to generate story. Please check your API key and try again.";
-        console.error("Error calling Gemini API:", error);
+        console.error("Error calling AI:", error);
         throw new Error("Failed to generate story");
     }
 
