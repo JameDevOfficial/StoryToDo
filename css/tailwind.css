@@ -216,6 +216,9 @@
   .h-auto {
     height: auto;
   }
+  .w-\[30px\] {
+    width: 30px;
+  }
   .w-full {
     width: 100%;
   }
@@ -224,12 +227,6 @@
   }
   .max-w-1\/2 {
     max-width: calc(1/2 * 100%);
-  }
-  .max-w-3 {
-    max-width: calc(var(--spacing) * 3);
-  }
-  .max-w-3\/4 {
-    max-width: calc(3/4 * 100%);
   }
   .max-w-full {
     max-width: 100%;

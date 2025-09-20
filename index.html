@@ -6,6 +6,7 @@
         <title>Story ToDo - JameDev</title>
         <script type="module" src="scripts/script.js"></script>
         <link href="/css/tailwind.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.2/jspdf.umd.min.js"></script>
     </head>
 
     <body class="bg-white dark:bg-[#121212] dark:text-[#e0e3f8]">
@@ -13,10 +14,10 @@
             class="flex h-auto justify-between bg-blue-500 p-4 text-white dark:bg-[#384ebe]">
             <div>Story Telling To-Do List</div>
             <img
+                alt="switch-theme"
                 id="switch-theme"
                 src="assets/moon.svg"
-                style="width: 30px; height: auto"
-                class="hover:cursor-pointer" />
+                class="hover:cursor-pointer w-[30px] h-auto" />
         </nav>
         <div
             id="main-wrapper"
@@ -33,7 +34,7 @@
                         with a creative story.
                     </p>
                     <div class="mb-4">
-                        <form id="add-task-form">
+                        <form id="add-task-form" novalidate >
                             <input
                                 type="text"
                                 id="new-task"

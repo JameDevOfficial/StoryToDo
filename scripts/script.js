@@ -122,6 +122,7 @@ function initTaskList() {
  */
 function handleSubmitTask() {
     const task = document.getElementById("new-task");
+    if (task.value === "") return;
     const taskText = task.value;
     const key = newTask(taskText);
     const deleteBtn = newTaskElement(taskText, key);
@@ -133,6 +134,7 @@ function handleSubmitTask() {
         newTaskEl.remove();
         removeTask(key);
     });
+    task.value = null;
 }
 
 /**

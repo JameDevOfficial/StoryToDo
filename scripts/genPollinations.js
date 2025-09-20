@@ -11,7 +11,7 @@ export function genImage(
 
 export async function generatePrivateText(aiPrompt, model = "openai", seed="42") {
     console.log("test");
-    const url = `https://text.pollinations.ai/${encodeURIComponent(aiPrompt)}&private=true&seed=${encodeURIComponent(seed)}`;
+    const url = `https://text.pollinations.ai/${encodeURIComponent(aiPrompt)}`;
     const fetchResponse = await fetch(url);
     const responseText = await fetchResponse.text();
     const sponsorSeparator = "\n---\n";
