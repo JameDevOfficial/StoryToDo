@@ -9,8 +9,7 @@ A client‑side web app that turns your to‑do list into a short, fun story and
 
 - Add/delete tasks with localStorage persistence
 - Generate a short creative story linking all tasks
-- Generate a matching AI image (no text/close‑ups)
-- Optional theme and language for the story
+- Generate a matching AI image
 - Dark mode toggle
 - Fully static (no server required)
 
